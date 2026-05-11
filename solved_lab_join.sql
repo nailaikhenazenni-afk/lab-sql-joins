@@ -36,12 +36,16 @@ GROUP BY
     s.store_id;
     
 SELECT 
-    rating, 
-    ROUND(AVG(length), 2) AS average_duration
+    c.name AS category_name, 
+    ROUND(AVG(f.length), 2) AS average_duration
 FROM 
-    film
+    category AS c
+JOIN 
+    film_category AS fc ON c.category_id = fc.category_id
+JOIN 
+    film AS f ON fc.film_id = f.film_id
 GROUP BY 
-    rating
+    c.name
 ORDER BY 
     average_duration DESC;
 
